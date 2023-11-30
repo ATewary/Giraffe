@@ -186,7 +186,6 @@ public class DatabaseManager {
         			sql = "SELECT * FROM distributors";
         			break;
         		default:
-        			System.out.println(req.length() >= 4 && req.substring(0,4).equals("/id/"));
         			if(req.length() >= 9 && req.substring(0,9).equals("/item-id/")) {
         				sql = "SELECT items.id, items.name, distributor_prices.cost FROM distributors JOIN distributor_prices ON distributors.id = distributor_prices.distributor JOIN items ON distributor_prices.item = items.id WHERE distributors.id IN (SELECT distributor FROM distributor_prices WHERE item = '" + req.substring(9) + "');";
         			}else {
@@ -210,8 +209,6 @@ public class DatabaseManager {
         try {
         	switch(req.pathInfo()) {
         	case "/add-item": 
-        		System.out.println("Map GET ID:" + map.get("id").value());
-        		System.out.println("Map GET NAME:" + map.get("name").value());
             	conn.createStatement().execute("INSERT INTO items (id, name) VALUES ('" + map.get("id").value() + "', '" + map.get("name").value() + "');");
             	break;
         	case "/add-inventory":
@@ -262,7 +259,6 @@ public class DatabaseManager {
         try {
         	switch(path) {
         	case "/delete-item":
-        		System.out.println("DELETE: " + param);
         		PreparedStatement ps = conn.prepareStatement("DELETE FROM items WHERE name = ?");
         		ps.setObject(1, param);
                 ps.executeUpdate();
