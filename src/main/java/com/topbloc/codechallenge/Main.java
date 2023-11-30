@@ -22,7 +22,25 @@ public class Main {
         });
 
         //TODO: Add your routes here. a couple of examples are below
-        get("/items", (req, res) -> DatabaseManager.getItems());
+        get("/items", (req, res) -> DatabaseManager.getItems(""));
+        get("/items/:next", (req, res) -> DatabaseManager.getItems(req.params(":next")));
+        get("/distributors", (req, res) -> DatabaseManager.getDistributors(""));
+        get("/distributors/:next", (req, res) -> DatabaseManager.getDistributors(req.params(":next")));
+        get("/distributors/item-id/:next", (req, res) -> DatabaseManager.getDistributors("/item-id/" + req.params(":next")));
+        post("/add-item", (req,res) -> DatabaseManager.post(req));
+        post("/add-inventory", (req,res) -> DatabaseManager.post(req));
+        post("/add-distributor", (req,res) -> DatabaseManager.post(req));
+        post("/add-catalog", (req,res) -> DatabaseManager.post(req));
+        put("/modify-inventory/:next", (req,res) -> DatabaseManager.put(req));
+        put("/modify-price/:next", (req,res) -> DatabaseManager.put(req));
+        delete("/delete-item/:next", (req,res) -> DatabaseManager.delete(req));
+        delete("/delete-distributor/:next", (req,res) -> DatabaseManager.delete(req));
+
+
+        
         get("/version", (req, res) -> "TopBloc Code Challenge v1.0");
+        
+        
+        
     }
 }
