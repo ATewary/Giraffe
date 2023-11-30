@@ -150,6 +150,7 @@ public class DatabaseManager {
     }
 
     // Controller functions - add your routes here. getItems is provided as an example
+
     public static JSONArray getItems(String req) {
         String sql = getAllItemsQuery;
         try {
@@ -196,6 +197,7 @@ public class DatabaseManager {
         	
             ResultSet set = conn.createStatement().executeQuery(sql);
             return convertResultSetToJson(set);
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
